@@ -17,3 +17,8 @@
 * `src/services/user/createUserService.ts`
 * The project use `bcryptjs` to encrypt passwords
 * And use type to bcrypt `@types/bcryptjs -D`
+***
+## Create user login
+* New file in services named `AuthUserService` will make the login
+* New file in controller to connect to the new service
+

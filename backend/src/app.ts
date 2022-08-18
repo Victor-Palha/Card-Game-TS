@@ -10,7 +10,7 @@ const app = express()
 //global middlewares
 app.use(express.json())
 app.use(cors())
-app.use(router)
+app.use('/api/', router)
 app.use((err:Error, req:Request, res:Response, next:NextFunction)=>{
     if(err instanceof Error){
         //if are erro

@@ -20,13 +20,16 @@
 * "express": "^4.18.1",
 * "express-async-errors": "^3.1.1",
 * "mysql2": "^2.3.3"
+* "jsonwebtoken": "^8.5.1",
 ## Development Libraries
 * "@types/bcryptjs": "^2.4.2",
 * "@types/config": "^3.3.0",
 * "@types/cors": "^2.8.12",
 * "@types/express": "^4.17.13",
+* "@types/jsonwebtoken": "^8.5.8",
 * "@types/node": "^18.7.6",
 * "prisma": "^4.2.1",
 * "ts-node": "^10.9.1",
 * "ts-node-dev": "^2.0.0",
 * "typescript": "^4.7.4"
+

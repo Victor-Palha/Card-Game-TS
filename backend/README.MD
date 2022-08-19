@@ -21,4 +21,24 @@
 ## Create user login
 * New file in services named `AuthUserService` will make the login
 * New file in controller to connect to the new service
-
+***
+# Using JWT
+* The application will use JWT to authenticate users in the API REST
+* When the user make login in the application the JSON WEB TOKEN will return the token
+* To make the servite to gerate the token we will do it in `src/services/AuthUserService`
+* `yarn add jsonwebtoken`
+* `yarn add @types/jsonwebtoken -D`
+* For secrect password from JWT we will put in enviromment variables.
+```ts
+const token = sign(
+    {
+        name: user.username,
+        email: user.email
+    },
+        process.env.JWT_SECRET,
+    {
+        subject: id,
+        expiresIn: '30d'
+    }
+)
+```

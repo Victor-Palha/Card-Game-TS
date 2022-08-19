@@ -3,6 +3,7 @@ import config from "config";
 import 'express-async-errors'
 import { router } from "./routers"; //Routes
 import cors from 'cors'
+import connectDB from "../config/db"; //API DATABASE
 
 //create app
 const app = express()
@@ -20,8 +21,9 @@ app.use((err:Error, req:Request, res:Response, next:NextFunction)=>{
 })
 
 //PORT
-const port = config.get<number>("port")
+const port = process.env.PORT
 //create listen
-app.listen(port, ()=>{
+app.listen(port, async ()=>{
+    await connectDB()
     console.log("Server online")
 })

@@ -8,7 +8,7 @@ datasource db {
 }
 //create Models yarn prisma migrate dev
 model User{
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
   email String
   username String
   password String
@@ -22,8 +22,8 @@ model User{
 model Friends{
   id_friend Int @id
   situation Boolean @default(false)
-  id_solicitante Int
-  id_solicitado Int
+  id_solicitante String
+  id_solicitado String
   solicitante User @relation("solicitante", fields: [id_solicitante], references: [id])
   solicitado User @relation("solicitado", fields: [id_solicitado], references: [id])
 
@@ -33,7 +33,7 @@ model Friends{
 
 model Deck{
   id Int @id
-  id_deck Int
+  id_deck String
   id_mongo String
   name String
 

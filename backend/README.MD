@@ -42,3 +42,51 @@ const token = sign(
     }
 )
 ```
+***
+# Private router Middleware
+* Using the same architecture the application will use a service and controller to make the route   
+    * `services/user/DetailsUserServices.ts` and `controller/user/DetailsUserController.ts`
+* The we create the router `/me`
+* Now create the middleware to validate the JWT.
+* New folder named `middlewares` on `src`.
+* And create de file named `idAuth.ts`
+```ts
+export function isAuth(req:Request, res:Response, next:NextFunction){
+    console.log("Middleware working!")
+    next()
+}
+```
+* And import to router and use as middleware on router `/me`
+    * `.get("/me", isAuth, new DetailsUserController().handle)`
+* In the middleware created import method `verify` fom jsonwebtoken.
+```ts
+interface PayLoad{
+    //id from JWT
+    sub:string
+}
+
+export function isAuth(req:Request, res:Response, next:NextFunction){
+    //Receive JWT
+    const tokenAuth = req.headers.authorization
+    //Validation if are token []
+    if(!tokenAuth){
+        return res.status(401).end()
+    }
+
+    //GET TOKEN
+    const [,token] = tokenAuth.split(" ")
+    console.log(token)
+    //Validate token
+    try {
+        //Verify with jsonwebtoken using TS interface
+        const { sub } = verify(
+            token,
+            process.env.JWT_SECRET
+        ) as PayLoad
+        //if is okay
+        next()
+    } catch (error) {
+        return res.status(401).end()
+    }
+}
+```

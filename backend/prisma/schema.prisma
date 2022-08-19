@@ -32,9 +32,8 @@ model Friends{
 }
 
 model Deck{
-  id Int @id
+  id Int @id 
   id_deck String
-  id_mongo String
   name String
 
   deck User @relation(fields: [id_deck], references: [id])

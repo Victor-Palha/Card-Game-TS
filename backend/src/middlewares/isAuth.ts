@@ -16,16 +16,23 @@ export function isAuth(req:Request, res:Response, next:NextFunction){
 
     //GET TOKEN
     const [,token] = tokenAuth.split(" ")
-    console.log(token)
+
     //Validate token
     try {
+
         //Verify with jsonwebtoken using TS interface
         const { sub } = verify(
             token,
             process.env.JWT_SECRET
         ) as PayLoad
+
+        //put id on request
+        
+        req.user_id = sub
+        
         //if is okay
-        next()
+        return next()
+
     } catch (error) {
         return res.status(401).end()
     }

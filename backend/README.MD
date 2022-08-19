@@ -84,9 +84,30 @@ export function isAuth(req:Request, res:Response, next:NextFunction){
             process.env.JWT_SECRET
         ) as PayLoad
         //if is okay
-        next()
+        return next()
     } catch (error) {
         return res.status(401).end()
     }
 }
 ```
+* Let's inject the user_id on Request
+* But first we need overwrite the type of Request.
+* New folder named `@types` on `src` and folder `express` inside the `@types`.
+* Create a file named `index.d.ts`
+```ts
+declare namespace Express{
+    export interface Request{
+        user_id: string
+    }
+}
+```
+* Now we added inside the Request
+* Now we config the TypesScript on `tsconfig.json`
+    * inside typeRoots we pass the way to our file
+* Back to middleware we write:
+    * `req.user_id = sub` before the `return next()`
+
+* Now in the controller `DetailsUserController.ts` we can user the `user_id`
+    * `const user_id = req.user_id`
+* Pass the user_id as parameter to `DetailsUserService.execute()`
+* After go to service file and make a search to database.

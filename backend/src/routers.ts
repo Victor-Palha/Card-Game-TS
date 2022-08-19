@@ -7,7 +7,7 @@ import { isAuth } from "./middlewares/isAuth";
 const router = Router()
 //routes
 router
-.post('/users', new CreateUserController().handle)
+.post('/register', new CreateUserController().handle)
 .post("/login", new AuthUserController().handle)
 .get("/me", isAuth, new DetailsUserController().handle)
 

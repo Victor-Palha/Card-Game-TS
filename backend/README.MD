@@ -111,3 +111,10 @@ declare namespace Express{
     * `const user_id = req.user_id`
 * Pass the user_id as parameter to `DetailsUserService.execute()`
 * After go to service file and make a search to database.
+
+# Connect to MongoDB
+* To connect we use `mongoose` module.
+* The configurates to connect are in `backend/config/db`
+* We will use the mongoose to store all cards from game and consume in your application
+* After connect to DB we create the Models in `src/models`
+* Then we start to create the controllers

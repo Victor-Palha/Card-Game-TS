@@ -127,3 +127,5 @@ declare namespace Express{
 # Create middleware to admin
 * Is a simple middleware to take id from user like the middleware `isAuth`
 * But we make a validation to this id to see if are admin.
+* Plus that i change the User table on prisma and add one more column named `admin`.
+* This admin column accept only boolean datas and i use this to make the validation on middleware `isAdmin.ts`.

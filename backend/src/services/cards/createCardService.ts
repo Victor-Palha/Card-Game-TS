@@ -1,6 +1,6 @@
 import { DeckModel, AvatarModel, UniqueModel } from "../../models/Cards";
 //Import interface
-import { AvatarCard } from "../../interfaces/cardsInterfaces";
+import { AvatarCard, UniqueCard } from "../../interfaces/cardsInterfaces";
 
 
 class CreateAvatarService{
@@ -21,7 +21,6 @@ class CreateAvatarService{
         }
         //Search name on database
         const nameAlreadyExists = await AvatarModel.find({name: name})
-        console.log(nameAlreadyExists)
         if(nameAlreadyExists.length === 1){
             throw new Error("This Avatar is already exists on database!")
         }
@@ -45,4 +44,42 @@ class CreateAvatarService{
     }
 }
 
-export {CreateAvatarService}
+class CreateUniqueService{
+    async execute({name, set_name, effect, atk_acc, atk_dec, def_acc, def_dec, healing, duration, negate_target, url}: UniqueCard){
+        if(!name){
+            throw new Error("Name missing")
+        }else if(!set_name){
+            throw new Error("Set name missing")
+        }else if(!effect){
+            throw new Error("Effect missing")
+        }else if(!duration){
+            throw new Error("Duration missing")
+        }
+        //Search name on database
+        const nameAlreadyExists = await UniqueModel.find({name: name})
+        if(nameAlreadyExists.length === 1){
+            throw new Error("This card is already in database")
+        }
+        //if Okay insert
+        try {
+            const newUnique = await UniqueModel.create({
+                name: name,
+                set_name: set_name,
+                effect: effect,
+                atk_acc: atk_acc,
+                atk_dec: atk_dec,
+                def_acc: def_acc,
+                def_dec: def_dec,
+                healing: healing,
+                duration: duration,
+                negate_target: negate_target,
+                url: url
+            })
+            return newUnique
+        } catch (err) {
+            throw new Error("Not possible connect to database... Try later!")
+        }
+    }
+}
+
+export {CreateAvatarService, CreateUniqueService}

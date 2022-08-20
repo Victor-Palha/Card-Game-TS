@@ -111,10 +111,19 @@ declare namespace Express{
     * `const user_id = req.user_id`
 * Pass the user_id as parameter to `DetailsUserService.execute()`
 * After go to service file and make a search to database.
-
+***
 # Connect to MongoDB
 * To connect we use `mongoose` module.
 * The configurates to connect are in `backend/config/db`
 * We will use the mongoose to store all cards from game and consume in your application
 * After connect to DB we create the Models in `src/models`
 * Then we start to create the controllers
+***
+# Create the controllers and services
+* Inside the folder `controllers` and `services` we create subfolders to cards
+* Then we create the class to be exported and imported to file `routers.ts`
+* We create a new folder to store ours `interfaces` on `src/interfaces`
+***
+# Create middleware to admin
+* Is a simple middleware to take id from user like the middleware `isAuth`
+* But we make a validation to this id to see if are admin.

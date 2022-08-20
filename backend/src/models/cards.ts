@@ -20,6 +20,7 @@ const avatarSchema = new Schema({
 const uniqueSchema = new Schema({
     name: String,
     set_name: String,
+    effect: String,
     atk_acc: Number,
     atk_dec: Number,
     def_acc: Number,

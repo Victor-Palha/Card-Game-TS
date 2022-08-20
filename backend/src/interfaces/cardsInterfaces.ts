@@ -9,4 +9,17 @@ interface AvatarCard{
     url: string
 }
 
-export {AvatarCard}
+interface UniqueCard{
+    name: string,
+    set_name: string,
+    effect: string,
+    atk_acc: number,
+    atk_dec: number,
+    def_acc: number,
+    def_dec: number,
+    healing: number,
+    duration: number,
+    negate_target: boolean,
+    url: string
+}
+export {AvatarCard, UniqueCard}

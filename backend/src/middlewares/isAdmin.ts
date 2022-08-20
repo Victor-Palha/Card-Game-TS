@@ -1,12 +1,13 @@
 import { Response, Request, NextFunction } from "express";
 import {verify} from "jsonwebtoken"
+import prismaClient from "../prisma";
 
 interface PayLoad{
     //id from JWT
     sub:string
 }
 
-export function isAdmin(req:Request, res:Response, next:NextFunction){
+export async function isAdmin(req:Request, res:Response, next:NextFunction){
     //Receive JWT
     const tokenAuth = req.headers.authorization
     //Validation if are token []
@@ -26,7 +27,15 @@ export function isAdmin(req:Request, res:Response, next:NextFunction){
             process.env.JWT_SECRET
         ) as PayLoad
         //verify if are Admin
-        if(sub != process.env.ID_ADMIN){
+        const userAdmin = await prismaClient.user.findFirst({
+            where:{
+                id: sub
+            },
+            select:{
+                admin: true
+            }
+        })
+        if(!userAdmin.admin){
             throw new Error("You are not allow to do it!")
         }
         //put id on request

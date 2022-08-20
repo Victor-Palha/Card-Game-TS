@@ -21,7 +21,8 @@ class CreateAvatarService{
         }
         //Search name on database
         const nameAlreadyExists = await AvatarModel.find({name: name})
-        if(nameAlreadyExists !== []){
+        console.log(nameAlreadyExists)
+        if(nameAlreadyExists.length === 1){
             throw new Error("This Avatar is already exists on database!")
         }
         //If it's all okay insert on database

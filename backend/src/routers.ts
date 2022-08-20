@@ -4,6 +4,7 @@ import { AuthUserController } from "./controllers/user/AuthUserController";
 import { DetailsUserController } from "./controllers/user/DetailsUserController";
 import { isAuth } from "./middlewares/isAuth";
 import { CreateAvatarController } from "./controllers/cards/createCardController";
+import { isAdmin } from "./middlewares/isAdmin";
 //create router
 const router = Router()
 //routes
@@ -12,5 +13,6 @@ router
 .post("/login", new AuthUserController().handle)
 .get("/me", isAuth, new DetailsUserController().handle)
 //Cards
-.post("/avatar", new CreateAvatarController().handle)
+.post("/avatar", isAdmin,new CreateAvatarController().handle)
+
 export {router}

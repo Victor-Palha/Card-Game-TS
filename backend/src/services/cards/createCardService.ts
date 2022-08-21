@@ -1,10 +1,10 @@
-import { DeckModel, AvatarModel, UniqueModel } from "../../models/Cards";
+import { DeckModel, AvatarModel, UniqueModel, CardsModel} from "../../models/Cards";
 //Import interface
-import { AvatarCard, UniqueCard } from "../../interfaces/cardsInterfaces";
+import {AvatarCardI, CardsI, UniqueCardI } from "../../interfaces/cardsInterfaces";
 
 
 class CreateAvatarService{
-    async execute({name, type, set_name, hp, attack, defense, unique_skill, url}: AvatarCard){
+    async execute({name, type, set_name, hp, attack, defense, unique_skill, url}: AvatarCardI){
         //Validation info from request
         if(!name){
             throw new Error("name missing")
@@ -45,7 +45,7 @@ class CreateAvatarService{
 }
 
 class CreateUniqueService{
-    async execute({name, set_name, effect, atk_acc, atk_dec, def_acc, def_dec, healing, duration, negate_target, url}: UniqueCard){
+    async execute({name, type, set_name, effect, atk_acc, atk_dec, def_acc, def_dec, healing, duration, negate_target, url}: UniqueCardI){
         if(!name){
             throw new Error("Name missing")
         }else if(!set_name){
@@ -64,6 +64,7 @@ class CreateUniqueService{
         try {
             const newUnique = await UniqueModel.create({
                 name: name,
+                type: type,
                 set_name: set_name,
                 effect: effect,
                 atk_acc: atk_acc,
@@ -82,4 +83,57 @@ class CreateUniqueService{
     }
 }
 
-export {CreateAvatarService, CreateUniqueService}
+class CreateCardsService{
+    async execute({name, type, set_name, effect, equipament, duration, atk_acc, atk_dec, def_acc, def_dec, half_damage, self_damage, change_atk, block_damage, healing_damage, double_damage, buy_card, change_effect, steal_card, negate_target, negate_all, max_hand_cards, url}: CardsI){
+        if(!name){
+            throw new Error("Name missing")
+        }else if(!type){
+            throw new Error("Type missing")
+        }else if(!set_name){
+            throw new Error("Set name missing")
+        }else if(!effect){
+            throw new Error("Effect missing")
+        }else if(!duration){
+            throw new Error("Duration missing")
+        }
+        //Search name on database
+        const nameAlreadyExists = await CardsModel.find({name: name})
+        if(nameAlreadyExists.length === 1){
+            throw new Error("This card is already in database")
+        }
+        //if Okay insert
+        try {
+            const newCard = await CardsModel.create({
+                name: name,
+                type: type,
+                set_name: set_name,
+                effect: effect,
+                equipament: equipament,
+                duration: duration,
+                atk_acc: atk_acc,
+                atk_dec: atk_dec,
+                def_acc: def_acc,
+                def_dec: def_dec,
+                half_damage: half_damage,
+                self_damage: self_damage,
+                change_atk: change_atk,
+                block_damage: block_damage,
+                healing_damage: healing_damage,
+                double_damage: double_damage,
+                buy_card: buy_card,
+                change_effect: change_effect,
+                steal_card: steal_card,
+                negate_target: negate_target,
+                negate_all: negate_all,
+                max_hand_cards: max_hand_cards,
+                url: url
+            })
+
+            return newCard
+        } catch (err) {
+            throw new Error("Not possible connect to database... Try later!")
+        }
+    }
+}
+
+export {CreateAvatarService, CreateUniqueService, CreateCardsService}

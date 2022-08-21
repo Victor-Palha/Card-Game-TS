@@ -36,6 +36,7 @@ model Deck{
   id_deck String @id
   id_mongo String
   name String
+  stars Int
 
   deck User @relation(fields: [id_deck], references: [id])
   @@map("decks")

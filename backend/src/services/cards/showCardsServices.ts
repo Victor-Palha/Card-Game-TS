@@ -1,4 +1,4 @@
-import { DeckModel, AvatarModel, UniqueModel } from "../../models/Cards";
+import { DeckModel, AvatarModel, UniqueModel, CardsModel } from "../../models/Cards";
 
 class ShowAvatarService{
     async execute(){
@@ -13,4 +13,12 @@ class ShowUniqueService{
     }
 }
 
-export {ShowAvatarService, ShowUniqueService}
+class ShowCardsService{
+    async execute(){
+        const cards = await CardsModel.find()
+        return cards
+    }
+}
+
+
+export {ShowAvatarService, ShowUniqueService, ShowCardsService}

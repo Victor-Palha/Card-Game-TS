@@ -130,7 +130,7 @@ declare namespace Express{
 * Plus that i change the User table on prisma and add one more column named `admin`.
 * This admin column accept only boolean datas and i use this to make the validation on middleware `isAdmin.ts`.
 ***
-# Crate controllers and services to show datas
+# Create controllers and services to show datas
 * After we created the controllers and services to insert on database the cards, we create routes and functions to get these datas.
 * `src/controllers/cards/showCardsController.ts` and `src/services/cards/showCardsServices.ts`
 * And we create the routes to acess on `src/routers.ts`

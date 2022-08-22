@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/components/ui/Button/index.txs"  ],
   "exclude": [
     "node_modules"
   ]

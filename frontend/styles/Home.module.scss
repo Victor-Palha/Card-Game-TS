@@ -1,0 +1,37 @@
+.conteiner{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  h1{
+    color: var(--white);
+    margin-bottom: 10px;
+    text-shadow: -2px 5px 3px rgb(153, 151, 151);
+  }
+  .login{ 
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    form{
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      input{
+        margin: 10px 0;
+      }
+    }
+  }
+  .signUp{
+      margin-top: 20px;
+      color: var(--white)
+  }
+}
+
+@media (max-width: 620px) {
+  .login{
+    max-width: 90%;
+  }
+  
+}

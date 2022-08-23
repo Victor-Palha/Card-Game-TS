@@ -9,6 +9,7 @@ import {Input} from '../../components/ui/Input'
 import {Button} from '../../components/ui/Button'
 //Contexts
 import { AuthContext } from '../../contexts/AuthContext'
+import { canSSRGuest } from '../../utils/canSSRGuest'
 export default function SignUp() {
 
   //States
@@ -61,3 +62,9 @@ export default function SignUp() {
     </>
   )
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx)=>{
+  return{
+    props:{}
+  }
+})

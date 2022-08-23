@@ -9,6 +9,7 @@ import {Input} from '../components/ui/Input'
 import {Button} from '../components/ui/Button'
 //Contexts
 import { AuthContext } from '../contexts/AuthContext'
+import { canSSRGuest } from '../utils/canSSRGuest'
 
 export default function Login() {
   //States
@@ -61,3 +62,9 @@ export default function Login() {
     </>
   )
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx)=>{
+  return {
+    props:{}
+  }
+})

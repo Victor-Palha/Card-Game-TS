@@ -23,7 +23,7 @@ export default function SignUp() {
   async function handleSignUp(event: FormEvent){
     event.preventDefault()
     if(name === '' || email === '' || password === ''){
-      toast.error("ERRO! Preencha os campos!")
+      toast.warning("ERRO! Preencha os campos!")
       return
     }
 

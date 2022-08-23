@@ -1,0 +1,38 @@
+.header{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    h1{
+        cursor: pointer;
+    }
+    span{
+        color: #dc143c;
+    }
+}
+.links{
+    display: flex;
+    align-items: center;
+    a{
+        font-size: 20px;
+        margin: 0 20px;
+        cursor: pointer;
+        
+        transition: 0.5s;
+    }
+    a:hover{
+        transform: scale(1.1);
+    }
+    button{
+        display: flex;
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: white;
+        transition: 0.5s;
+    }
+    button:hover{
+        color:#dc143c
+    }
+}

@@ -23,7 +23,7 @@ export default function Login() {
   async function handleLogin(e: FormEvent){
     e.preventDefault()
     if(email ===''|| password ===''){
-      toast.error("ERRO! Preencha os campos!")
+      toast.warning("ERRO! Preencha os campos!")
       return
     }
     setLoading(true)

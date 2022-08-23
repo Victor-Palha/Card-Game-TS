@@ -31,7 +31,7 @@ class AuthUserService{
         const token = sign(
             {
                 name: user.username,
-                email: user.email
+                email: user.email,
             },
                 process.env.JWT_SECRET,
             {

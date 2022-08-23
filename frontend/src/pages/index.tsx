@@ -9,7 +9,7 @@ import {Button} from '../components/ui/Button'
 
 import { AuthContext } from '../contexts/AuthContext'
 
-export default function Home() {
+export default function Login() {
   //States
   const {signIn} = useContext(AuthContext)
   const [email, setEmail] = useState('')

@@ -9,7 +9,7 @@ export function setupAPIClient(ctx = undefined){
     let cookies = parseCookies(ctx)
 
     const api = axios.create({
-        baseURL: "http://localhost:3000/api",
+        baseURL: "http://localhost:3333/api",
         headers: {
             Authorization: `Bearer ${cookies['@game.token']}`
         }

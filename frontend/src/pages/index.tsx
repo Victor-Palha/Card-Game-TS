@@ -20,13 +20,20 @@ export default function Login() {
   //Functions
   async function handleLogin(e: FormEvent){
     e.preventDefault()
+    if(email ===''|| password ===''){
+      alert("ERRO! Preencha os campos!")
+      return
+    }
+    setLoading(true)
 
     let data = {
       email,
       password
     }
-
+    
     await signIn(data)
+
+    setLoading(false)
   }
 
   //Component
@@ -43,7 +50,7 @@ export default function Login() {
         <form onSubmit={handleLogin}>
           <Input type='email' placeholder='Digite seu email' value={email} onChange={(e)=> setEmail(e.target.value)}/>
           <Input type='password'placeholder='Digite sua senha' value={password} onChange={(e)=> setPassword(e.target.value)}/>
-          <Button children='Enviar' type='submit' loading={false}/>
+          <Button children='Enviar' type='submit' loading={loading}/>
         </form>
       </div>
       <Link href='/signup'>  

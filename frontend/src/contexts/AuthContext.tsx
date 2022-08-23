@@ -3,6 +3,7 @@ import {destroyCookie, setCookie, parseCookies} from 'nookies'
 import Router from 'next/router'
 import {setupAPIClient} from '../services/api'
 import { api } from "../services/errors/apiClient";
+import {toast} from 'react-toastify'
 
 
 type AuthContextData = {
@@ -73,11 +74,13 @@ export function AuthProvider({children}: AuthProviderProps){
             })
             //Enviar token para todas as rotas
             api.defaults.headers['Authorization'] = `Bearer ${token}`
+
+            toast.success('Logado com sucesso!')
             //Redirecionar
             Router.push('/home')
             console.log(response.data)
         } catch (err) {
-            console.log(err)
+            toast.error("Erro ao acessar!")
         }
     }
     //cadastrar usuario
@@ -88,10 +91,10 @@ export function AuthProvider({children}: AuthProviderProps){
                 email,
                 password
             })
-
+            toast.success("Registrado com sucesso!")
             Router.push('/')
         } catch (err) {
-            console.log(err)
+            toast.error("Erro ao cadastrar, tente novamente!")
         }
     }
     return(

@@ -1,6 +1,7 @@
 import { useState, FormEvent, useContext } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import {toast} from 'react-toastify'
 // CSS
 import styles from '../../../styles/Home.module.scss'
 //Components
@@ -21,7 +22,7 @@ export default function SignUp() {
   async function handleSignUp(event: FormEvent){
     event.preventDefault()
     if(name === '' || email === '' || password === ''){
-      alert("ERRO! Preencha os campos!")
+      toast.error("ERRO! Preencha os campos!")
       return
     }
 

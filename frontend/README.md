@@ -7,3 +7,4 @@
 * `yarn add sass`
 * `yarn add react-icons`
 * `yarn add jwt-decode nookies axios`
+* `yarn add react-toastify`

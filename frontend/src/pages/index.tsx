@@ -1,12 +1,13 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useContext, FormEvent, useState } from 'react'
+import {toast} from 'react-toastify'
 //CSS
 import styles from '../../styles/Home.module.scss'
 //Components
 import {Input} from '../components/ui/Input'
 import {Button} from '../components/ui/Button'
-
+//Contexts
 import { AuthContext } from '../contexts/AuthContext'
 
 export default function Login() {
@@ -21,7 +22,7 @@ export default function Login() {
   async function handleLogin(e: FormEvent){
     e.preventDefault()
     if(email ===''|| password ===''){
-      alert("ERRO! Preencha os campos!")
+      toast.error("ERRO! Preencha os campos!")
       return
     }
     setLoading(true)

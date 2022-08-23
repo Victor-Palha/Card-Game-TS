@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState, useEffect } from "react";
 import {destroyCookie, setCookie, parseCookies} from 'nookies'
 import Router from 'next/router'
 import {setupAPIClient} from '../services/api'
@@ -51,6 +51,26 @@ export function AuthProvider({children}: AuthProviderProps){
 
     const [user, setUser] = useState<UserProps>()
     const isAuthenticated = !!user
+
+    //UseEffect - manter usuário logado
+    useEffect(()=>{
+        //get token
+        const {'@game.token': token} = parseCookies()
+        if(token){
+            api.get('/me').then(response=>{
+                const {id, username, email} = response.data
+                setUser({
+                    id,
+                    username,
+                    email
+                })
+            })
+            .catch(()=>{
+                //deslogar user
+                signOut()
+            })
+        }
+    },[])
 
     //Logar usuário
     async function signIn({email, password}:SignInProps){

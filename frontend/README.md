@@ -5,3 +5,5 @@
 * `npx create-next-app name`
 * `yarn add typescript @types/react @types/node -D`
 * `yarn add sass`
+* `yarn add react-icons`
+* `yarn add jwt-decode nookies axios`

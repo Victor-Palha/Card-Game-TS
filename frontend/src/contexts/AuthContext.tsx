@@ -26,7 +26,7 @@ type SignInProps = {
 }
 
 type SignUpProps = {
-    name: string
+    username: string
     email: string
     password: string
 }
@@ -64,6 +64,7 @@ export function AuthProvider({children}: AuthProviderProps){
                     username,
                     email
                 })
+                console.log(user)
             })
             .catch(()=>{
                 //deslogar user
@@ -104,10 +105,10 @@ export function AuthProvider({children}: AuthProviderProps){
         }
     }
     //cadastrar usuario
-    async function signUp({name, email, password}: SignUpProps){
+    async function signUp({username, email, password}: SignUpProps){
         try {
             const response = await api.post('/register',{
-                name,
+                username,
                 email,
                 password
             })

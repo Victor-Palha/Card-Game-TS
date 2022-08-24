@@ -1,8 +1,17 @@
-import { canSSRAuth } from "../../utils/canSSRAuth"
 import Head from "next/head"
+import Link from 'next/link'
+
+import styles from './style.module.scss'
 import { Header } from "../../components/Header"
+import { canSSRAuth } from "../../utils/canSSRAuth"
+import { useContext, useEffect, useState } from 'react'
+//context
+import { AuthContext } from '../../contexts/AuthContext'
+import { signOut } from "../../contexts/AuthContext"
 
 export default function Home(){
+    //Dados do usuário
+
     return(
         <>
             <Head>
@@ -10,6 +19,13 @@ export default function Home(){
             </Head>
             <div>
                 <Header/>
+            </div>
+            <div className={styles.userBar}>
+                <div className={styles.user}>
+                    <Link href="/user">
+                        <a>{}</a>
+                    </Link>
+                </div>
             </div>
         </>
     )

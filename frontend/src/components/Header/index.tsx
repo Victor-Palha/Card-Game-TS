@@ -2,12 +2,13 @@ import styles from './style.module.scss'
 import Link from 'next/link'
 import {AiOutlinePoweroff} from "react-icons/ai"
 import { useContext } from 'react'
+
 //context
 import { AuthContext } from '../../contexts/AuthContext'
 export function Header(){
 
     //logout 
-    const {signOut} = useContext(AuthContext)
+    const {signOut, user} = useContext(AuthContext)
 
     return(
         <header className={styles.header}>

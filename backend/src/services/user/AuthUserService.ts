@@ -30,7 +30,7 @@ class AuthUserService{
         //Gerate WEB TOKEN
         const token = sign(
             {
-                name: user.username,
+                username: user.username,
                 email: user.email,
             },
                 process.env.JWT_SECRET,
@@ -41,7 +41,7 @@ class AuthUserService{
         )
         return {
             id: user.id,
-            name: user.username,
+            username: user.username,
             email: user.email,
             token: token
         }

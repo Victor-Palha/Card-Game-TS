@@ -11,6 +11,7 @@ import { signOut } from "../../contexts/AuthContext"
 
 export default function Home(){
     //Dados do usuário
+    const {user} = useContext(AuthContext)
 
     return(
         <>
@@ -23,7 +24,7 @@ export default function Home(){
             <div className={styles.userBar}>
                 <div className={styles.user}>
                     <Link href="/user">
-                        <a>{}</a>
+                        <a>{!user? "Carregando...": user.username}</a>
                     </Link>
                 </div>
             </div>

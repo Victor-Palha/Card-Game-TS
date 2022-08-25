@@ -34,12 +34,14 @@ type SignUpProps = {
 type AuthProviderProps = {
     children: ReactNode
 }
+
 export const AuthContext = createContext({} as AuthContextData)
 
 //deslogar usuario
 export function signOut(){
     try {
         destroyCookie(undefined, '@game.token')
+        toast.info("Deslogado com sucesso")
         Router.push('/')
     } catch (err) {
         console.log('Error to signOut')
@@ -64,7 +66,7 @@ export function AuthProvider({children}: AuthProviderProps){
                     username,
                     email
                 })
-                console.log(user)
+                
             })
             .catch(()=>{
                 //deslogar user

@@ -12,6 +12,7 @@ model User{
   email String
   username String
   password String
+  image String @default("")
   admin Boolean @default(false)
   id_solicitante Friends[] @relation("solicitante")
   id_solicitado Friends[] @relation("solicitado")

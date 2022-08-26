@@ -18,6 +18,7 @@ type UserProps = {
     id: string,
     username: string,
     email:string
+    image: string
 }
 
 type SignInProps = {
@@ -60,11 +61,12 @@ export function AuthProvider({children}: AuthProviderProps){
         const {'@game.token': token} = parseCookies()
         if(token){
             api.get('/me').then(response=>{
-                const {id, username, email} = response.data
+                const {id, username, email, image} = response.data
                 setUser({
                     id,
                     username,
-                    email
+                    email,
+                    image
                 })
                 
             })
@@ -83,7 +85,7 @@ export function AuthProvider({children}: AuthProviderProps){
                 password
             })
             //Gerar cookies
-            const {id, username, token} = response.data
+            const {id, username, token, image} = response.data
             setCookie(undefined, '@game.token', token, {
                 maxAge: 60 * 60 * 24 * 30, // Expira em 1 mes
                 path: '/' //Quais rotas terão acesso a esse token
@@ -93,7 +95,8 @@ export function AuthProvider({children}: AuthProviderProps){
             setUser({
                 id,
                 username,
-                email
+                email,
+                image
             })
             //Enviar token para todas as rotas
             api.defaults.headers['Authorization'] = `Bearer ${token}`

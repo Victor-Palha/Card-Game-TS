@@ -9,7 +9,8 @@ class DetailsUserService{
             select:{
                 id: true,
                 username: true,
-                email: true
+                email: true,
+                image: true
             }
         })
         return user

@@ -21,10 +21,33 @@
         }
     }
     .links{
+        cursor: pointer;
         font-size: 25px;
         margin: 10px 20px;
         svg{
             margin: 0px 10px;
+        }
+    }
+}
+
+.main{
+    text-align: center;
+    margin-top: 100px;
+    ul{
+        margin: auto;
+        max-width: 800px;
+
+        display: flex;
+        flex-direction: column;
+
+        color: white;
+        a{
+            font-size: 30px;
+            transition: 0.5s;
+            margin: 10px;
+        }
+        a:hover{
+            color: crimson;
         }
     }
 }

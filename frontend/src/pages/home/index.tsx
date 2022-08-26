@@ -33,6 +33,13 @@ export default function Home(){
                     <AiOutlineBell/>
                 </div>
             </div>
+            
+            <section className={styles.main}>
+                <ul>
+                    <a href="">Criar Sala</a>
+                    <a href="">Decks</a>
+                </ul>
+            </section>
         </>
     )
 }

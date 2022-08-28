@@ -20,7 +20,7 @@ export default function Modal({children, text}: Props){
     }
 
     return(
-        <div id="modal" className='hide'>
+        <div id="modal" className='hide' >
             <div className={styles.fade} onClick={closeModal}>
 
             </div>

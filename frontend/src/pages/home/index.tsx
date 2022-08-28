@@ -2,18 +2,18 @@ import Head from "next/head"
 import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
 import {AiOutlineBell, AiOutlineTeam} from "react-icons/ai"
+import { toast } from "react-toastify"
 
 //components
 import styles from './style.module.scss'
 import { Header } from "../../components/Header"
-import { canSSRAuth } from "../../utils/canSSRAuth"
 import User from "../../components/User"
+import Modal from "../../components/Modal"
+import { Input } from "../../components/ui/Input"
 
 //context
 import { AuthContext } from '../../contexts/AuthContext'
-import Modal from "../../components/Modal"
-import { Input } from "../../components/ui/Input"
-import { toast } from "react-toastify"
+import { canSSRAuth } from "../../utils/canSSRAuth"
 
 export default function Home(){
     //Dados do usuário
@@ -61,8 +61,12 @@ export default function Home(){
             
             <section className={styles.main}>
                 <ul>
-                    <a href="">Criar Sala</a>
-                    <a href="">Decks</a>
+                    <Link href="/rooms">
+                        <a>Criar salas</a>
+                    </Link>
+                    <Link href="/decks">
+                        <a>Decks</a>
+                    </Link>
                 </ul>
             </section>
         </>

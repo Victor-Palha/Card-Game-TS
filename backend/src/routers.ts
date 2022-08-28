@@ -4,12 +4,11 @@ import { Router, Request, Response, request } from "express";
 import { CreateUserController } from "./controllers/user/createUserController";
 import { AuthUserController } from "./controllers/user/AuthUserController";
 import { DetailsUserController } from "./controllers/user/DetailsUserController";
-import { CreateAvatarController, CreateCardController, CreateUniqueController } from "./controllers/cards/createCardController";
+import { CreateAvatarController, CreateCardController, CreateDeckController, CreateUniqueController } from "./controllers/cards/createCardController";
 import { ShowAllController, ShowAvatarController, ShowCardsContoller, ShowUniqueController } from "./controllers/cards/showCardsController";
 //Middlewares
 import { isAuth } from "./middlewares/isAuth";
 import { isAdmin } from "./middlewares/isAdmin";
-import { AllFriendsController } from "./controllers/user/FriendsUserController";
 
 
 //create router
@@ -23,7 +22,7 @@ router
 .post("/avatar", isAdmin,new CreateAvatarController().handle)
 .post("/unique", isAdmin, new CreateUniqueController().handle)
 .post("/card", isAdmin, new CreateCardController().handle)
-.get("/friends", isAuth, new AllFriendsController().handle)
+.post("/deck", isAuth, new CreateDeckController().handle)
 //Cards get
 .get("/avatar", new ShowAvatarController().handle)
 .get("/uniques", new ShowUniqueController().handle)

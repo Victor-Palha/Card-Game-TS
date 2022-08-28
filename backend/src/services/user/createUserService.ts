@@ -44,7 +44,7 @@ class CreateUserService{
             data:{
                 username: username,
                 email: email,
-                password: passwordHash
+                password: passwordHash,
             },
             select:{
                 username: true,

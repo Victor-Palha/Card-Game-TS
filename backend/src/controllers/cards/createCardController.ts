@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
+import prismaClient from "../../prisma";
 //Import services
-import {CreateAvatarService, CreateUniqueService, CreateCardsService} from "../../services/cards/createCardService";
+import {CreateAvatarService, CreateUniqueService, CreateCardsService, createDeckService} from "../../services/cards/createCardService";
+
 
 class CreateAvatarController{
     async handle(req:Request, res:Response){
@@ -41,5 +43,18 @@ class CreateCardController{
     }
 }
 
+class CreateDeckController{
+    async handle(req:Request, res:Response){
+        const {name, avatar, offensive, ability, deffensive, unique_skill, user_id} = req.body
 
-export {CreateAvatarController, CreateUniqueController, CreateCardController}
+        const createDeck = new createDeckService
+
+        const deck = await createDeck.execute({name, avatar, offensive, ability, deffensive, unique_skill, user_id})
+
+
+        return res.json(deck)
+    }
+}
+
+
+export {CreateAvatarController, CreateUniqueController, CreateCardController, CreateDeckController}

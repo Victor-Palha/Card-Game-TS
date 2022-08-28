@@ -14,32 +14,19 @@ model User{
   password String
   image String @default("")
   admin Boolean @default(false)
-  id_solicitante Friends[] @relation("solicitante")
-  id_solicitado Friends[] @relation("solicitado")
-  id_deck Deck[]
-
+  deck Deck[]
   @@map("users")
 }
 
-model Friends{
-  id_friend Int @id
-  situation Boolean @default(false)
-  id_solicitante String
-  id_solicitado String
-  solicitante User @relation("solicitante", fields: [id_solicitante], references: [id])
-  solicitado User @relation("solicitado", fields: [id_solicitado], references: [id])
-
-  @@map("friends")
-
-}
 
 model Deck{
-  id_deck String @id
+  id_deck String @id @default(uuid())
+  id_user String 
   id_mongo String
   name String
   stars Int
 
-  deck User @relation(fields: [id_deck], references: [id])
+  user User @relation(fields: [id_user], references: [id])
   @@map("decks")
 
 }

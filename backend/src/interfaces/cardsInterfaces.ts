@@ -38,17 +38,26 @@ interface CardsI{
     half_damage: boolean,
     self_damage: number,
     change_atk: boolean,
-    block_damage: Boolean,
-    healing_damage: Boolean,
-    double_damage: Boolean,
-    buy_card: Number,
-    change_effect: Boolean,
-    steal_card: Boolean,
-    negate_target: Boolean,
-    negate_all: Boolean,
-    max_hand_cards: Number,
-    url: String
+    block_damage: boolean,
+    healing_damage: boolean,
+    double_damage: boolean,
+    buy_card: number,
+    change_effect: boolean,
+    steal_card: boolean,
+    negate_target: boolean,
+    negate_all: boolean,
+    max_hand_cards: number,
+    url: string
 }
 
+interface DeckI{
+    user_id: string,
+    name: string,
+    avatar: string,
+    offensive: [string],
+    deffensive: [string],
+    ability: [string],
+    unique_skill: [string]
+}
 
-export {AvatarCardI, UniqueCardI, CardsI}
+export {AvatarCardI, UniqueCardI, CardsI, DeckI}

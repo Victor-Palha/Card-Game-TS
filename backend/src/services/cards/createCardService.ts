@@ -1,6 +1,8 @@
+import prismaClient from "../../prisma/"
 import { DeckModel, AvatarModel, UniqueModel, CardsModel} from "../../models/Cards";
 //Import interface
-import {AvatarCardI, CardsI, UniqueCardI } from "../../interfaces/cardsInterfaces";
+import {AvatarCardI, CardsI, UniqueCardI, DeckI } from "../../interfaces/cardsInterfaces";
+
 
 
 class CreateAvatarService{
@@ -136,4 +138,41 @@ class CreateCardsService{
     }
 }
 
-export {CreateAvatarService, CreateUniqueService, CreateCardsService}
+class createDeckService{
+    async execute({name, avatar, offensive, ability, deffensive, unique_skill, user_id}:DeckI){
+        //Validation
+        if(!name){
+            throw new Error("Name missing")
+        }
+        if(!avatar){
+            throw new Error("Avatar missing")
+        }
+        //Insert
+        try {
+            const newDeck = await DeckModel.create({
+                avatar: avatar,
+                offensive: offensive,
+                ability: ability,
+                deffensive: deffensive,
+                unique_skill:  unique_skill
+            })
+            const mongoID = newDeck._id.toString()
+
+
+            const deckRelation = await prismaClient.deck.create({
+                data:{
+                    id_mongo: mongoID,
+                    id_user: user_id,
+                    name: name,
+                    stars: 0,
+                }
+            })
+
+            return newDeck
+        } catch (err) {
+            throw new Error("Not possible connect to database... Try later!")
+        }
+    }
+}
+
+export {CreateAvatarService, CreateUniqueService, CreateCardsService, createDeckService}

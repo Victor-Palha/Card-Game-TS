@@ -1,6 +1,7 @@
 import {model, Schema} from "mongoose"
 
 const deckSchema = new Schema({
+    name: String,
     avatar: String,
     offensive: [String],
     deffensive: [String],

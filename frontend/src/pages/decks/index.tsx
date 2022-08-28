@@ -2,6 +2,7 @@ import Head from "next/head"
 import Link from "next/link"
 import { toast } from "react-toastify"
 import { useState, useEffect } from "react"
+import {AiOutlinePlusCircle} from "react-icons/ai"
 import styles from './style.module.scss'
 
 //Components
@@ -38,8 +39,11 @@ export default function Decks(){
             <Header/>
         </div>
         <section className={styles.decks}>
-        <div className='conteiner'>
-                <div className='lista-decks'>
+            <div className={styles.nav}>
+                <AiOutlinePlusCircle/>
+            </div>
+            <div className={styles.conteiner}>
+                <div className={styles.listaDecks}>
                     {decks.map((deck)=>{
                         return(
                             <article key={deck.id}>

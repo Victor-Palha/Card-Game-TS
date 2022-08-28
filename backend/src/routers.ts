@@ -9,6 +9,7 @@ import { ShowAllController, ShowAvatarController, ShowCardsContoller, ShowUnique
 //Middlewares
 import { isAuth } from "./middlewares/isAuth";
 import { isAdmin } from "./middlewares/isAdmin";
+import { AllFriendsController } from "./controllers/user/FriendsUserController";
 
 
 //create router
@@ -22,6 +23,7 @@ router
 .post("/avatar", isAdmin,new CreateAvatarController().handle)
 .post("/unique", isAdmin, new CreateUniqueController().handle)
 .post("/card", isAdmin, new CreateCardController().handle)
+.get("/friends", isAuth, new AllFriendsController().handle)
 //Cards get
 .get("/avatar", new ShowAvatarController().handle)
 .get("/uniques", new ShowUniqueController().handle)

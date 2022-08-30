@@ -1,7 +1,7 @@
 import Head from "next/head"
 import Link from "next/link"
 import { toast } from "react-toastify"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import {AiOutlinePlusCircle} from "react-icons/ai"
 import styles from './style.module.scss'
 
@@ -14,13 +14,19 @@ import { AuthContext } from '../../contexts/AuthContext'
 import { api } from "../../services/errors/apiClient"
 
 export default function Decks(){
+    const {user} = useContext(AuthContext)
+    var id = (!user)? "Carregando...": user.id
     const [decks, setDecks] = useState([])
     const [loading, setLoading] = useState(true)
     useEffect(()=>{
         async function loadDecks(){
-            const response = await api.get('/decks')
-            setDecks(response.data)
-            setLoading(false)
+            if(id == "Carregando..."){
+                toast.info("Carregando!")
+            }else{
+                const response = await api.get(`/deck/${id}`)
+                setDecks(response.data)
+                setLoading(false)
+            }
         }
         loadDecks()
     },[])
@@ -39,11 +45,9 @@ export default function Decks(){
             <Header/>
         </div>
         <section className={styles.decks}>
-            <div className={styles.nav}>
-                <AiOutlinePlusCircle/>
-            </div>
             <div className={styles.conteiner}>
                 <div className={styles.listaDecks}>
+                    <h1>Seus Decks</h1>
                     {decks.map((deck)=>{
                         return(
                             <article key={deck.id}>
@@ -51,6 +55,9 @@ export default function Decks(){
                             </article>
                         )
                     })}
+                    <article>
+                    <AiOutlinePlusCircle/>
+                    </article>
                 </div>
             </div>
         </section>

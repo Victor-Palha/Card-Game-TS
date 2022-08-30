@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CreateCardsService } from "../../services/cards/createCardService";
 //services
-import { ShowAvatarService, ShowCardsService, ShowUniqueService } from "../../services/cards/showCardsServices";
+import { ShowAvatarService, ShowCardsService, ShowDeckService, ShowUniqueService } from "../../services/cards/showCardsServices";
 
 class ShowAvatarController{
     async handle(req:Request, res:Response){
@@ -48,4 +48,15 @@ class ShowAllController{
     }
 }
 
-export {ShowAvatarController, ShowUniqueController, ShowCardsContoller, ShowAllController}
+class ShowDeckController{
+    async handle(req: Request, res: Response){
+        const id = req.params.id
+        //Service
+        const showDeck = new ShowDeckService
+
+        const decks = await showDeck.execute(id)
+        return res.json(decks)
+    }
+}
+
+export {ShowAvatarController, ShowUniqueController, ShowCardsContoller, ShowAllController, ShowDeckController}

@@ -5,7 +5,7 @@ import { CreateUserController } from "./controllers/user/createUserController";
 import { AuthUserController } from "./controllers/user/AuthUserController";
 import { DetailsUserController } from "./controllers/user/DetailsUserController";
 import { CreateAvatarController, CreateCardController, CreateDeckController, CreateUniqueController } from "./controllers/cards/createCardController";
-import { ShowAllController, ShowAvatarController, ShowCardsContoller, ShowUniqueController } from "./controllers/cards/showCardsController";
+import { ShowAllController, ShowAvatarController, ShowCardsContoller, ShowDeckController, ShowUniqueController } from "./controllers/cards/showCardsController";
 //Middlewares
 import { isAuth } from "./middlewares/isAuth";
 import { isAdmin } from "./middlewares/isAdmin";
@@ -28,4 +28,5 @@ router
 .get("/uniques", new ShowUniqueController().handle)
 .get("/cards", new ShowCardsContoller().handle)
 .get("/all", new ShowAllController().handle)
+.get("/deck/:id", isAuth, new ShowDeckController().handle)
 export {router}

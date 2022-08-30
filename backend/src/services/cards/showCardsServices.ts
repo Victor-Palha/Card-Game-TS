@@ -1,4 +1,5 @@
 import { DeckModel, AvatarModel, UniqueModel, CardsModel } from "../../models/Cards";
+import prismaClient from "../../prisma";
 
 class ShowAvatarService{
     async execute(){
@@ -20,5 +21,18 @@ class ShowCardsService{
     }
 }
 
+class ShowDeckService{
+    async execute(id: string){
+        const decks = await prismaClient.deck.findMany({
+            where:{
+                id_user: id
+            }, select:{
+                id_mongo: true,
+                name: true
+            }
+        })
+        return decks
+    }
+}
 
-export {ShowAvatarService, ShowUniqueService, ShowCardsService}
+export {ShowAvatarService, ShowUniqueService, ShowCardsService, ShowDeckService}

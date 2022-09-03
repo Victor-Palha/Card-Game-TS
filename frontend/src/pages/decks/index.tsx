@@ -14,22 +14,8 @@ import { AuthContext } from '../../contexts/AuthContext'
 import { api } from "../../services/errors/apiClient"
 
 export default function Decks(){
-    const {user} = useContext(AuthContext)
-    var id = (!user)? "Carregando...": user.id
-    const [decks, setDecks] = useState([])
+    const {decks} = useContext(AuthContext)
     const [loading, setLoading] = useState(true)
-    useEffect(()=>{
-        async function loadDecks(){
-            if(id == "Carregando..."){
-                toast.info("Carregando!")
-            }else{
-                const response = await api.get(`/deck/${id}`)
-                setDecks(response.data)
-                setLoading(false)
-            }
-        }
-        loadDecks()
-    },[])
     if(loading){
         <div>
             <h1>Carregando Decks...</h1>
@@ -50,8 +36,8 @@ export default function Decks(){
                     <h1>Seus Decks</h1>
                     {decks.map((deck)=>{
                         return(
-                            <article key={deck.id}>
-                                <h1><Link href={`/deck/${deck.id}`}>{deck.name}</Link></h1>
+                            <article key={deck.id_mongo}>
+                                <h1 key={deck.id_mongo}><Link href={`/deck/${deck.id_mongo}`}>{deck.name}</Link></h1>
                             </article>
                         )
                     })}

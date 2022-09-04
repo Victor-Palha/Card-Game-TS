@@ -1,12 +1,36 @@
 .decks{
-    
-    .nav{
-        margin: 25px 0px;
-        display: flex;
-        justify-content: center;
+    padding: 50px;
+    text-align: center;
+    color: white;
+   
+}
+.conteiner{
+    display: flex;
+    justify-content: center;
+}
+.listaDecks{
+    display: flex;
+    article{
+        background-color: var(--dark-900);
+        margin: 20px;
+        padding: 15px;
         color: white;
-        font-size: 25px;
-        align-items: center;
+        border-radius: 5px;
+        height: 200px;
+        max-width: 150px;
+        width: 150px;
+        text-align: center;
         cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        transition: 0.5s;
+        svg{
+            margin: 0px auto 15px auto;
+            font-size: 30px;
+        }
+    }
+    article:hover{
+        transform: scale(1.1);
+        color: crimson;
     }
 }

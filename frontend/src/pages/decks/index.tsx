@@ -34,19 +34,24 @@ export default function Decks(){
             <Header/>
         </div>
         <section className={styles.decks}>
+            <h1>Seus Decks</h1>
             <div className={styles.conteiner}>
                 <div className={styles.listaDecks}>
-                    <h1>Seus Decks</h1>
                     {decks.map((deck)=>{
                         return(
+                            <Link href={`/deck/${deck.id_mongo}`}>
                             <article key={deck.id_mongo}>
-                                <h1 key={deck.id_mongo}><Link href={`/deck/${deck.id_mongo}`}>{deck.name}</Link></h1>
+                                <h1 key={deck.id_mongo}>{deck.name}</h1>
                             </article>
+                            </Link>
                         )
                     })}
-                    <article>
-                    <AiOutlinePlusCircle/>
-                    </article>
+                    <Link href={`/newDeck`}>
+                        <article>
+                            <AiOutlinePlusCircle/>
+                            <span>Novo Deck</span>
+                        </article>
+                    </Link>
                 </div>
             </div>
         </section>

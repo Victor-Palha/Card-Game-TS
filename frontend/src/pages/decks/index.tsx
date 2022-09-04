@@ -14,13 +14,16 @@ import { AuthContext } from '../../contexts/AuthContext'
 import { api } from "../../services/errors/apiClient"
 
 export default function Decks(){
-    const {decks} = useContext(AuthContext)
-    const [loading, setLoading] = useState(true)
-    if(loading){
-        <div>
-            <h1>Carregando Decks...</h1>
-        </div>
-    }
+    const {user} = useContext(AuthContext)
+    const [decks, setDecks] = useState([])
+    const id = (!user)? "Carregando...": user.id
+    useEffect(()=>{
+        async function loadDecks(id:string){
+            const response = await api.get(`/deck/${id}`)
+            setDecks(response.data)
+        }
+            loadDecks(id)    
+    },[id])
 
     return(
         <>

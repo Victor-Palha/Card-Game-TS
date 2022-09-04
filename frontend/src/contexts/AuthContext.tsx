@@ -12,7 +12,7 @@ type AuthContextData = {
     signIn: (credentials: SignInProps) => Promise<void>
     signOut: () => void
     signUp: (credentials: SignUpProps) => Promise<void>
-    decks: DeckProps[]
+   
 }
 type DeckProps = {
     name: string
@@ -57,7 +57,7 @@ export function signOut(){
 export function AuthProvider({children}: AuthProviderProps){
 
     const [user, setUser] = useState<UserProps>()
-    const [decks, setDecks] = useState<DeckProps[]>([])
+    const [userDecks, setDecks] = useState<DeckProps[]>([])
     const isAuthenticated = !!user
 
     //UseEffect - manter usuário logado
@@ -133,8 +133,9 @@ export function AuthProvider({children}: AuthProviderProps){
         const response = await api.get(`/deck/${id}`)
         setDecks(response.data)
     }
+
     return(
-        <AuthContext.Provider value={{user, isAuthenticated, decks, signIn, signOut, signUp}}>
+        <AuthContext.Provider value={{user, isAuthenticated, signIn, signOut, signUp}}>
             {children}
         </AuthContext.Provider>
     )

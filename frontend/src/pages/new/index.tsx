@@ -16,13 +16,14 @@ export default function NewDeck(){
     const [cards, setCards] = useState([])
     const id = (!user)? "Carregando...": user.id
     useEffect(()=>{
-        async function getAvatars(){
-            const response = await api.get("/avatar")
+        async function getCards(){
+            const responseA = await api.get("/avatar")
+            const responseC = await api.get("/cards")
             //console.log(response.data)
-            setAvatar(response.data)
+            setAvatar(responseA.data)
+            setCards(responseC.data)
         }
-        getAvatars()
-        console.log(avatar[0])
+        getCards()
     },[id])
 return(
     <>
@@ -55,19 +56,58 @@ return(
                 <div className={styles.capsule}>
                     <h1>Cartas Ofensivas</h1>
                     <div className={styles.cards}>
-
+                        {cards.map((card)=>{
+                            if(card.type == "Offensive"){
+                                return(
+                                    <article key={card._id}>
+                                        <h1 key={card._id}>{card.name}</h1>
+                                        <p>Tipo: {card.type}</p>
+                                        <p>Set: {card.set_name}</p>
+                                        <div className={styles.effect}>
+                                            <span>{card.effect}</span>
+                                        </div>
+                                    </article>
+                                )
+                            }
+                        })}
                     </div>
                 </div>
                 <div className={styles.capsule}>
                     <h1>Cartas Defensivas</h1>
                     <div className={styles.cards}>
-
+                        {cards.map((card)=>{
+                                if(card.type == "Deffensive"){
+                                    return(
+                                        <article key={card._id}>
+                                            <h1 key={card._id}>{card.name}</h1>
+                                            <p>Tipo: {card.type}</p>
+                                            <p>Set: {card.set_name}</p>
+                                            <div className={styles.effect}>
+                                                <span>{card.effect}</span>
+                                            </div>
+                                        </article>
+                                    )
+                                }
+                            })}
                     </div>
                 </div>
                 <div className={styles.capsule}>
                     <h1>Cartas de Habilidade</h1>
                     <div className={styles.cards}>
-
+                        {cards.map((card)=>{
+                                if(card.type == "Ability"){
+                                    return(
+                                        <article key={card._id}>
+                                            <h1 key={card._id}>{card.name}</h1>
+                                            <p>Tipo: {card.type}</p>
+                                            <p>Set: {card.set_name}</p>
+                                            <div className={styles.effect}>
+                                                <span>{card.effect}</span>
+                                            </div>
+                                        </article>
+                                    )
+                                }
+                            })}
                     </div>
                 </div>
             </div>

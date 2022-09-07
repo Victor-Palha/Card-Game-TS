@@ -6,8 +6,24 @@ import { useState, useEffect, useContext } from "react"
 import { Header } from "../../components/Header"
 //Auth
 import { canSSRAuth } from "../../utils/canSSRAuth"
+import { AuthContext } from '../../contexts/AuthContext'
+import { api } from '../../services/errors/apiClient'
 
 export default function NewDeck(){
+    const {user} = useContext(AuthContext)
+    const [avatar, setAvatar] = useState([])
+    const [unique, setUnique] = useState([])
+    const [cards, setCards] = useState([])
+    const id = (!user)? "Carregando...": user.id
+    useEffect(()=>{
+        async function getAvatars(){
+            const response = await api.get("/avatar")
+            //console.log(response.data)
+            setAvatar(response.data)
+        }
+        getAvatars()
+        console.log(avatar[0])
+    },[id])
 return(
     <>
         <Head>
@@ -17,12 +33,23 @@ return(
             <Header/>
         </div>
         <section className={styles.deck}>
-            <h1>Cartas</h1>
             <div className={styles.conteiner}>
                 <div className={styles.capsule}>
                     <h1>Avatares</h1>
                     <div className={styles.cards}>
-                        
+                    {avatar.map((a)=>{
+                        return(
+                            <article key={a._id}>
+                                <h1 key={a._id}>{a.name}</h1>
+                                <p>Tipo: {a.type}</p>
+                                <div className={styles.status}>
+                                    <p>Atk: {a.attack}</p>
+                                    <p>Def: {a.defense}</p>
+                                    <p>Hp: {a.hp}</p>
+                                </div>
+                            </article>
+                        )
+                    })}
                     </div>
                 </div>
                 <div className={styles.capsule}>

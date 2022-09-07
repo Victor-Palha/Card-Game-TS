@@ -14,6 +14,8 @@ export default function NewDeck(){
     const [avatar, setAvatar] = useState([])
     const [unique, setUnique] = useState([])
     const [cards, setCards] = useState([])
+
+    const [select, setSelect] = useState<string[]>([])
     const id = (!user)? "Carregando...": user.id
     useEffect(()=>{
         async function getCards(){
@@ -25,6 +27,12 @@ export default function NewDeck(){
         }
         getCards()
     },[id])
+    function selectCard(id:string){
+        setSelect([...select, id])
+    }
+    function teste(){
+        console.log(select)
+    }
 return(
     <>
         <Head>
@@ -40,7 +48,7 @@ return(
                     <div className={styles.cards}>
                     {avatar.map((a)=>{
                         return(
-                            <article key={a._id}>
+                            <article key={a._id} onClick={()=>selectCard(a._id)}>
                                 <h1 key={a._id}>{a.name}</h1>
                                 <p>Tipo: {a.type}</p>
                                 <div className={styles.status}>
@@ -54,6 +62,7 @@ return(
                     </div>
                 </div>
                 <div className={styles.capsule}>
+                    <button onClick={()=>teste()}>teste</button>
                     <h1>Cartas Ofensivas</h1>
                     <div className={styles.cards}>
                         {cards.map((card)=>{

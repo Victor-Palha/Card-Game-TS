@@ -9,16 +9,24 @@ import { canSSRAuth } from "../../utils/canSSRAuth"
 import { AuthContext } from '../../contexts/AuthContext'
 import { api } from '../../services/errors/apiClient'
 
+interface Cards{
+    _id: string,
+    name: string,
+    set_name: string,
+    effect: string
+}
+
 export default function NewDeck(){
     const {user} = useContext(AuthContext)
     const [avatar, setAvatar] = useState([])
     const [unique, setUnique] = useState([])
     const [cards, setCards] = useState([])
 
-    const [avatarSelect, setsAvatar] = useState<string[]>([])
+    const [avatarSelect, setsAvatar] = useState([])
     const [cardSelect, setsCards] = useState([])
-    const [deck, setDeck] = useState<string[]>([])
+    const [deck, setDeck] = useState([])
     const id = (!user)? "Carregando...": user.id
+
     useEffect(()=>{
         async function getCards(){
             const responseA = await api.get("/avatar")
@@ -29,11 +37,17 @@ export default function NewDeck(){
         }
         getCards()
     },[id])
+
     function selectAvatar(id:string){
         setsAvatar([id])
     }
-    function selectCards(id){
-        setsCards([...cardSelect, id])
+    function selectCards(id:string){
+        cards.map((card)=>{
+            if(card._id == id){
+                setsCards([...cardSelect, card])
+            }
+            
+        })
     }
     function selectDeck(){
         const prototypeDeck = [...avatarSelect, ...cardSelect]
@@ -158,7 +172,7 @@ return(
                 <div className={styles.capsule}>
                     <h1>Cartas Ofensivas</h1>
                     <div className={styles.cards}>
-                        {cards.map((card)=>{
+                        {cardSelect.map((card)=>{
                             if(card.type == "Offensive"){
                                 return(
                                     <article key={card._id} onClick={()=>selectCards(card._id)}>

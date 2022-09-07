@@ -13,6 +13,7 @@ class ShowAvatarController{
     }
 }
 
+
 class ShowUniqueController{
     async handle(req:Request, res:Response){
         const showUniques = new ShowUniqueService

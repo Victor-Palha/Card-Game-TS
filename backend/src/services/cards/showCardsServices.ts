@@ -7,6 +7,7 @@ class ShowAvatarService{
         return avatars
     }
 }
+
 class ShowUniqueService{
     async execute(){
         const uniques = await UniqueModel.find()

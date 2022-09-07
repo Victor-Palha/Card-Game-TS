@@ -1,6 +1,5 @@
 import Head from "next/head"
 import Link from "next/link"
-import { toast } from "react-toastify"
 import { useState, useEffect, useContext } from "react"
 import {AiOutlinePlusCircle} from "react-icons/ai"
 import styles from './style.module.scss'
@@ -46,7 +45,7 @@ export default function Decks(){
                             </Link>
                         )
                     })}
-                    <Link href={`/newDeck`}>
+                    <Link href={`/new`}>
                         <article>
                             <AiOutlinePlusCircle/>
                             <span>Novo Deck</span>

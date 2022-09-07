@@ -17,7 +17,33 @@ return(
             <Header/>
         </div>
         <section className={styles.deck}>
+            <h1>Cartas</h1>
+            <div className={styles.conteiner}>
+                <div className={styles.capsule}>
+                    <h1>Avatares</h1>
+                    <div className={styles.cards}>
+                        
+                    </div>
+                </div>
+                <div className={styles.capsule}>
+                    <h1>Cartas Ofensivas</h1>
+                    <div className={styles.cards}>
 
+                    </div>
+                </div>
+                <div className={styles.capsule}>
+                    <h1>Cartas Defensivas</h1>
+                    <div className={styles.cards}>
+
+                    </div>
+                </div>
+                <div className={styles.capsule}>
+                    <h1>Cartas de Habilidade</h1>
+                    <div className={styles.cards}>
+
+                    </div>
+                </div>
+            </div>
         </section>
     </>
 )

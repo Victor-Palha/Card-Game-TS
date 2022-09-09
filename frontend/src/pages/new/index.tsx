@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState, useEffect, useContext } from "react"
 //Components
 import { Header } from "../../components/Header"
+import { Avatar } from '../../components/ui/Avatar'
 //Auth
 import { canSSRAuth } from "../../utils/canSSRAuth"
 import { AuthContext } from '../../contexts/AuthContext'
@@ -73,21 +74,7 @@ return(
             <div className={styles.conteiner}>
                 <div className={styles.capsule}>
                     <h1>Avatares</h1>
-                    <div className={styles.cards}>
-                    {avatar.map((a)=>{
-                        return(
-                            <article key={a._id} onClick={()=>selectAvatar(a._id)}>
-                                <h1 key={a._id}>{a.name}</h1>
-                                <p>Tipo: {a.type}</p>
-                                <div className={styles.status}>
-                                    <p>Atk: {a.attack}</p>
-                                    <p>Def: {a.defense}</p>
-                                    <p>Hp: {a.hp}</p>
-                                </div>
-                            </article>
-                        )
-                    })}
-                    </div>
+                    <Avatar {...avatar} {...selectAvatar}/>
                 </div>
                 <div className={styles.capsule}>
                     <h1>Cartas Ofensivas</h1>

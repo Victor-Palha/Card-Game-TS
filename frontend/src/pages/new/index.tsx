@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState, useEffect, useContext } from "react"
 //Components
 import { Header } from "../../components/Header"
+import { Input } from '../../components/ui/Input'
 //Auth
 import { canSSRAuth } from "../../utils/canSSRAuth"
 import { AuthContext } from '../../contexts/AuthContext'
@@ -159,7 +160,10 @@ return(
                 </div>
             </div>
             <div className={styles.myDeck}>
-                <h1>Meu Deck</h1>
+                <div className={styles.nav}>
+                    <h1>Nome do Deck:</h1>
+                    <Input type="text" placeholder="Novo Deck"/>
+                </div>
                 <div className={styles.capsule}>
                     <h1>Avatar</h1>
                     <div className={styles.cards}>
@@ -186,7 +190,7 @@ return(
                         {cardSelect.map((card)=>{
                             if(card.type == "Offensive"){
                                 return(
-                                    <article key={card._id} onClick={()=>selectCards(card._id)}>
+                                    <article key={card._id}>
                                         <h1 key={card._id}>{card.name}</h1>
                                         <p>Tipo: {card.type}</p>
                                         <p>Set: {card.set_name}</p>

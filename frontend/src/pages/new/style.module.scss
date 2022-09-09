@@ -56,9 +56,24 @@
     }
 }
 .myDeck{
+    .nav{
+    text-align: center;
+    }
+    margin: 0px auto;
+    padding: 0px 20px;
     border-left: 1px solid crimson;
     color: white;
     h1{
         margin: 0px 20px;
+    }
+    .capsule{
+        max-width: 200px;
+        .cards{
+            article{
+                span{
+                    display: none;
+                }
+            }
+        }
     }
 }

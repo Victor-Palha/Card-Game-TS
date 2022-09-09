@@ -4,7 +4,6 @@ import Link from "next/link"
 import { useState, useEffect, useContext } from "react"
 //Components
 import { Header } from "../../components/Header"
-import { Avatar } from '../../components/ui/Avatar'
 //Auth
 import { canSSRAuth } from "../../utils/canSSRAuth"
 import { AuthContext } from '../../contexts/AuthContext'
@@ -16,10 +15,21 @@ interface Cards{
     set_name: string,
     effect: string
 }
+interface Avatar{
+    _id: string,
+    name: string,
+    type: string,
+    set_name: string, 
+    hp: number, 
+    attack: number, 
+    defense: number, 
+    unique_skill: string[]
+    url: string
+}
 
 export default function NewDeck(){
     const {user} = useContext(AuthContext)
-    const [avatar, setAvatar] = useState([])
+    const [avatar, setAvatar] = useState<Avatar[]>([])
     const [unique, setUnique] = useState([])
     const [cards, setCards] = useState([])
 
@@ -74,7 +84,21 @@ return(
             <div className={styles.conteiner}>
                 <div className={styles.capsule}>
                     <h1>Avatares</h1>
-                    <Avatar {...avatar} {...selectAvatar}/>
+                    <div className={styles.cards}>
+                    {avatar.map((a)=>{
+                        return(
+                            <article key={a._id} onClick={()=>selectAvatar(a._id)}>
+                                <h1 key={a._id}>{a.name}</h1>
+                                <p>Tipo: {a.type}</p>
+                                <div className={styles.status}>
+                                    <p>Atk: {a.attack}</p>
+                                    <p>Def: {a.defense}</p>
+                                    <p>Hp: {a.hp}</p>
+                                </div>
+                            </article>
+                        )
+                    })}
+                    </div>
                 </div>
                 <div className={styles.capsule}>
                     <h1>Cartas Ofensivas</h1>

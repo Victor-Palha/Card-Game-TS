@@ -10,12 +10,6 @@ import { canSSRAuth } from "../../utils/canSSRAuth"
 import { AuthContext } from '../../contexts/AuthContext'
 import { api } from '../../services/errors/apiClient'
 
-interface Cards{
-    _id: string,
-    name: string,
-    set_name: string,
-    effect: string
-}
 interface Avatar{
     _id: string,
     name: string,
@@ -24,7 +18,7 @@ interface Avatar{
     hp: number, 
     attack: number, 
     defense: number, 
-    unique_skill: string[]
+    unique_skills: [],
     url: string
 }
 
@@ -42,10 +36,12 @@ export default function NewDeck(){
     useEffect(()=>{
         async function getCards(){
             const responseA = await api.get("/avatar")
+            const responseU = await api.get("/uniques")
             const responseC = await api.get("/cards")
             //console.log(response.data)
             setAvatar(responseA.data)
             setCards(responseC.data)
+            setUnique(responseU.data)
         }
         getCards()
     },[id])
@@ -170,18 +166,34 @@ return(
                     {avatar.map((a)=>{
                         if(avatarSelect[0] == a._id){
                             return(
-                                <article key={a._id}>
-                                    <h1 key={a._id}>{a.name}</h1>
-                                    <p>Tipo: {a.type}</p>
-                                    <div className={styles.status}>
-                                        <p>Atk: {a.attack}</p>
-                                        <p>Def: {a.defense}</p>
-                                        <p>Hp: {a.hp}</p>
-                                    </div>
-                                </article>
+                                <>          
+                                    <article key={a._id}>
+                                        <h1 key={a._id}>{a.name}</h1>
+                                        <p>Tipo: {a.type}</p>
+                                        <div className={styles.status}>
+                                            <p>Atk: {a.attack}</p>
+                                            <p>Def: {a.defense}</p>
+                                            <p>Hp: {a.hp}</p>
+                                        </div>
+                                    </article>
+                                    <h1>Habilidade única</h1>
+                                    {unique.map((unique)=>{
+                                        if(unique._id == a.unique_skills){
+                                            return(
+                                                <article key={unique._id}>
+                                                    <h1 key={unique._id}>{unique.name}</h1>
+                                                    <div className={styles.effect}>
+                                                        <span>{unique.effect}</span>
+                                                    </div>
+                                                </article>
+                                            )
+                                        }
+                                    })}
+                                </>
                             )
                         }
                     })}
+                    
                     </div>
                 </div>
                 <div className={styles.capsule}>
@@ -189,6 +201,46 @@ return(
                     <div className={styles.cards}>
                         {cardSelect.map((card)=>{
                             if(card.type == "Offensive"){
+                                return(
+                                    <article key={card._id}>
+                                        <h1 key={card._id}>{card.name}</h1>
+                                        <p>Tipo: {card.type}</p>
+                                        <p>Set: {card.set_name}</p>
+                                        <div className={styles.effect}>
+                                            <span>{card.effect}</span>
+                                        </div>
+                                    </article>
+
+                                )
+                            }
+                        })}
+                    </div>
+                </div>
+                <div className={styles.capsule}>
+                    <h1>Cartas Defensivas</h1>
+                    <div className={styles.cards}>
+                        {cardSelect.map((card)=>{
+                            if(card.type == "Deffensive"){
+                                return(
+                                    <article key={card._id}>
+                                        <h1 key={card._id}>{card.name}</h1>
+                                        <p>Tipo: {card.type}</p>
+                                        <p>Set: {card.set_name}</p>
+                                        <div className={styles.effect}>
+                                            <span>{card.effect}</span>
+                                        </div>
+                                    </article>
+                                    
+                                )
+                            }
+                        })}
+                    </div>
+                </div>
+                <div className={styles.capsule}>
+                    <h1>Cartas Habilidade</h1>
+                    <div className={styles.cards}>
+                        {cardSelect.map((card)=>{
+                            if(card.type == "Ability"){
                                 return(
                                     <article key={card._id}>
                                         <h1 key={card._id}>{card.name}</h1>

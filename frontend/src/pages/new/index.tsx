@@ -183,7 +183,7 @@ return(
                                                 <article key={unique._id}>
                                                     <h1 key={unique._id}>{unique.name}</h1>
                                                     <div className={styles.effect}>
-                                                        <span>{unique.effect}</span>
+                                                        <p>{unique.effect}</p>
                                                     </div>
                                                 </article>
                                             )

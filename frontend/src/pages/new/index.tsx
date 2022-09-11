@@ -5,6 +5,7 @@ import { useState, useEffect, useContext } from "react"
 //Components
 import { Header } from "../../components/Header"
 import { Input } from '../../components/ui/Input'
+import { Button } from '../../components/ui/Button'
 //Auth
 import { canSSRAuth } from "../../utils/canSSRAuth"
 import { AuthContext } from '../../contexts/AuthContext'
@@ -59,10 +60,19 @@ export default function NewDeck(){
     }
     function selectDeck(){
         const prototypeDeck = [...avatarSelect, ...cardSelect]
-        if(prototypeDeck.length < 12 || prototypeDeck.length > 22){
+        if(prototypeDeck.length < 11 || prototypeDeck.length > 21){
             alert(`${prototypeDeck.length} não é um número válido!`)
         }else{
-           setDeck([...avatarSelect, ...cardSelect]) 
+            avatar.map((a)=>{
+                if(avatarSelect[0] == a._id){
+                    unique.map((unique)=>{
+                        if(unique._id == a.unique_skills){
+                            setDeck([...avatarSelect, ...cardSelect, unique])
+                        }
+                    })
+                }
+            })
+            
         }
         
     }
@@ -159,6 +169,7 @@ return(
                 <div className={styles.nav}>
                     <h1>Nome do Deck:</h1>
                     <Input type="text" placeholder="Novo Deck"/>
+                    <Button type='submit' onClick={ ()=> selectDeck() }>{"Submeter"}</Button>
                 </div>
                 <div className={styles.capsule}>
                     <h1>Avatar</h1>

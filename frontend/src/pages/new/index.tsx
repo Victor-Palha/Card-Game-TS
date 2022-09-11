@@ -198,6 +198,7 @@ return(
                                             <span>{card.effect}</span>
                                         </div>
                                     </article>
+                                    
                                 )
                             }
                         })}

@@ -45,11 +45,11 @@ class CreateCardController{
 
 class CreateDeckController{
     async handle(req:Request, res:Response){
-        const {name, avatar, offensive, ability, deffensive, unique_skill, user_id} = req.body
+        const {name, avatar, cards, unique_skill, user_id} = req.body
 
         const createDeck = new createDeckService
 
-        const deck = await createDeck.execute({name, avatar, offensive, ability, deffensive, unique_skill, user_id})
+        const deck = await createDeck.execute({name, avatar, cards, unique_skill, user_id})
 
 
         return res.json(deck)

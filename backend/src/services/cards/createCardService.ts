@@ -139,7 +139,7 @@ class CreateCardsService{
 }
 
 class createDeckService{
-    async execute({name, avatar, offensive, ability, deffensive, unique_skill, user_id}:DeckI){
+    async execute({name, avatar, cards, unique_skill, user_id}:DeckI){
         //Validation
         if(!name){
             throw new Error("Name missing")
@@ -151,11 +151,10 @@ class createDeckService{
         try {
             const newDeck = await DeckModel.create({
                 avatar: avatar,
-                offensive: offensive,
-                ability: ability,
-                deffensive: deffensive,
-                unique_skill:  unique_skill
+                cards: cards,
+                unique_skill: unique_skill
             })
+            
             const mongoID = newDeck._id.toString()
 
 

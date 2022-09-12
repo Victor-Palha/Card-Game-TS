@@ -3,10 +3,8 @@ import {model, Schema} from "mongoose"
 const deckSchema = new Schema({
     name: String,
     avatar: String,
-    offensive: [String],
-    deffensive: [String],
-    ability: [String],
-    unique_skill: [String]
+    unique_skill: String,
+    cards: [String]
 })
 const avatarSchema = new Schema({
     name: String,

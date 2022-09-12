@@ -54,10 +54,8 @@ interface DeckI{
     user_id: string,
     name: string,
     avatar: string,
-    offensive: [string],
-    deffensive: [string],
-    ability: [string],
-    unique_skill: [string]
+    unique_skill: string,
+    cards: string[]
 }
 
 export {AvatarCardI, UniqueCardI, CardsI, DeckI}

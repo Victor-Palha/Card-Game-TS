@@ -25,6 +25,7 @@ interface Avatar{
 
 export default function NewDeck(){
     const {user} = useContext(AuthContext)
+    const [message, setMessage] = useState('');
     const [avatar, setAvatar] = useState<Avatar[]>([])
     const [unique, setUnique] = useState([])
     const [cards, setCards] = useState([])
@@ -47,13 +48,17 @@ export default function NewDeck(){
         getCards()
     },[id])
 
+    const handleChange = event => {
+        setMessage(event.target.value);
+    };
+
     function selectAvatar(id:string){
         setsAvatar([id])
     }
     function selectCards(id:string){
         cards.map((card)=>{
             if(card._id == id){
-                setsCards([...cardSelect, card])
+                setsCards([...cardSelect, card._id])
             }
             
         })
@@ -65,9 +70,10 @@ export default function NewDeck(){
         }else{
             avatar.map((a)=>{
                 if(avatarSelect[0] == a._id){
-                    unique.map((unique)=>{
+                    unique.map(async (unique)=>{
                         if(unique._id == a.unique_skills){
                             setDeck([...avatarSelect, ...cardSelect, unique])
+                            await deckDB(message, avatarSelect[0], cardSelect, unique._id, id)
                         }
                     })
                 }
@@ -75,6 +81,10 @@ export default function NewDeck(){
             
         }
         
+    }
+    async function deckDB(name:string, avatar:string, cards:string[], unique_skill:string, user_id:string){
+        await api.post("/deck", {name, avatar, cards, unique_skill, user_id})
+
     }
     function teste(){
         console.log(deck)
@@ -168,7 +178,7 @@ return(
             <div className={styles.myDeck}>
                 <div className={styles.nav}>
                     <h1>Nome do Deck:</h1>
-                    <Input type="text" placeholder="Novo Deck"/>
+                    <Input type="text" id="message" name="message" placeholder="Novo Deck" onChange={handleChange} value={message}/>
                     <Button type='submit' onClick={ ()=> selectDeck() }>{"Submeter"}</Button>
                 </div>
                 <div className={styles.capsule}>

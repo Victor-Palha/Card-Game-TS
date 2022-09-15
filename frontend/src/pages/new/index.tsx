@@ -11,13 +11,29 @@ import { canSSRAuth } from "../../utils/canSSRAuth"
 import { AuthContext } from '../../contexts/AuthContext'
 import { api } from '../../services/errors/apiClient'
 import { CardsProvider } from '../../contexts/CardsContext'
-import { Avatar } from '../../components/Cards'
+import { Avatar, Cards } from '../../components/Cards'
 
 
 export default function NewDeck(){
     return(
-        <CardsProvider>
-            <Avatar/>
+    <CardsProvider>
+        <>
+            <Head>
+                <title>New Deck - The Game</title>
+            </Head>
+            <div>
+                <Header/>
+            </div>
+
+            <section className={styles.deck}>
+                <div className={styles.conteiner}>
+                    <Avatar/>
+                    <Cards validation={"Offensive"}/>
+                    <Cards validation={"Defensive"}/>
+                    <Cards validation={"Ability"}/>
+                </div>
+            </section>    
+        </>
         </CardsProvider>
     )
 }

@@ -75,7 +75,7 @@ export function AuthProvider({children}: AuthProviderProps){
                 signOut()
             })
         }
-    },[])
+    })
 
     //Logar usuário
     async function signIn({email, password}:SignInProps){

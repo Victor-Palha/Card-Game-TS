@@ -10,8 +10,8 @@ import { Button } from '../../components/ui/Button'
 import { canSSRAuth } from "../../utils/canSSRAuth"
 import { AuthContext } from '../../contexts/AuthContext'
 import { api } from '../../services/errors/apiClient'
-import { CardsProvider } from '../../contexts/CardsContext'
-import { Avatar, Cards } from '../../components/Cards'
+import { CardsContext, CardsProvider } from '../../contexts/CardsContext'
+import { Avatar, Cards, DeckCards } from '../../components/Cards'
 
 
 export default function NewDeck(){
@@ -25,14 +25,21 @@ export default function NewDeck(){
                 <Header/>
             </div>
 
-            <section className={styles.deck}>
-                <div className={styles.conteiner}>
-                    <Avatar/>
-                    <Cards validation={"Offensive"}/>
-                    <Cards validation={"Defensive"}/>
-                    <Cards validation={"Ability"}/>
-                </div>
-            </section>    
+            <div className={styles.box}>
+                <section className={styles.deck}>
+                    <Input type="text" placeholder='Nome do seu deck'/><Button>Salvar</Button>
+                    <DeckCards validation={"Ability"}/>
+                    
+                </section>
+                <section className={styles.allCards}>
+                    <div className={styles.conteiner}>
+                        <Avatar/>
+                        <Cards validation={"Offensive"}/>
+                        <Cards validation={"Defensive"}/>
+                        <Cards validation={"Ability"}/>
+                    </div>
+                </section> 
+            </div>
         </>
         </CardsProvider>
     )

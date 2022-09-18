@@ -25,10 +25,13 @@ export function Avatar(){
             </div>
     )
 }
+type Cards = {
+    validation: string,
+    inDeck?: string[]
+}
 
-
-export function Cards({validation}){
-    const {cards} = useContext(CardsContext)
+export function Cards({validation}: Cards){
+    const {cards, addCard} = useContext(CardsContext)
 
     return(
         <div className={styles.capsule}>
@@ -37,7 +40,7 @@ export function Cards({validation}){
                 {cards.map((card)=>{
                     if(card.type == `${validation}`){
                         return(
-                            <article key={card._id}>
+                            <article key={card._id} onClick={()=>addCard(card._id)}>
                                 <h1 key={card._id}>{card.name}</h1>
                                 <p>Tipo: {card.type}</p>
                                 <p>Set: {card.set_name}</p>
@@ -52,3 +55,29 @@ export function Cards({validation}){
         </div>
     )
 }
+export function DeckCards({validation}: Cards){
+    const {cards, removeCard, cardsDeck} = useContext(CardsContext)
+
+    return(
+        <div className={styles.capsule}>
+            <h1>{validation} Cards</h1>
+            <div className={styles.cards}>
+                {cards.map((card)=>{
+                    for(let i = 0; i < cardsDeck.length; i++){
+                        if(card._id == cardsDeck[i]){
+                            return(
+                                <article key={card._id} onClick={()=>removeCard(card._id)}>
+                                    <h1 key={card._id}>{card.name}</h1>
+                                    <p>Tipo: {card.type}</p>
+                                    <p>Set: {card.set_name}</p>
+                                    <div className={styles.effect}>
+                                        <span>{card.effect}</span>
+                                    </div>
+                                </article>
+                            )
+                        }
+                    }
+                })}
+            </div>
+        </div>
+    )}

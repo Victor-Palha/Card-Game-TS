@@ -14,6 +14,7 @@
                 border-bottom: 1px solid crimson;
                 margin: 5px;
             }
+            max-width: 40%;
             cursor: pointer;
             color: white;
             background-color: var(--dark-900);
@@ -21,8 +22,7 @@
             border-radius: 5px;
             padding: 10px;
             margin: 15px;
-            height: 300px;
-            max-height: 300px;
+            transition: 0.5s;
             .status{
                 display: flex;
                 margin-top: 100px;
@@ -41,5 +41,10 @@
         .select{
             background-color: crimson;
         }
+    }
+}
+.cards{
+    article:hover{
+        transform: scale(1.1);
     }
 }

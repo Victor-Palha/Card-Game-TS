@@ -53,9 +53,9 @@ interface CardsI{
 interface DeckI{
     user_id: string,
     name: string,
-    avatar: string,
-    unique_skill: string,
-    cards: string[]
+    avatar: AvatarCardI,
+    unique_skill: UniqueCardI,
+    cards: CardsI[]
 }
 
 export {AvatarCardI, UniqueCardI, CardsI, DeckI}

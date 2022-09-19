@@ -63,7 +63,7 @@ export function DeckCards({validation, inDeck, removeCard}: Cards){
     return(
         <div className={styles.capsule}>
             <h1>{validation} Cards</h1>
-            <div className={styles.cards}>
+            <div className={styles.cards} id={styles.inDeck}>
                 {cards.map((card)=>{
                     for(let i = 0; i < inDeck.length; i++){
                         if(card._id == inDeck[i]){

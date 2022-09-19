@@ -27,11 +27,13 @@ export function Avatar(){
 }
 type Cards = {
     validation: string,
-    inDeck?: string[]
+    inDeck?: string[],
+    addCard?: (id:string)=>void,
+    removeCard?: (id:string)=>void
 }
 
-export function Cards({validation}: Cards){
-    const {cards, addCard} = useContext(CardsContext)
+export function Cards({validation, addCard}: Cards){
+    const {cards} = useContext(CardsContext)
 
     return(
         <div className={styles.capsule}>
@@ -55,16 +57,16 @@ export function Cards({validation}: Cards){
         </div>
     )
 }
-export function DeckCards({validation}: Cards){
-    const {cards, removeCard, cardsDeck} = useContext(CardsContext)
+export function DeckCards({validation, inDeck, removeCard}: Cards){
+    const {cards} = useContext(CardsContext)
 
     return(
         <div className={styles.capsule}>
             <h1>{validation} Cards</h1>
             <div className={styles.cards}>
                 {cards.map((card)=>{
-                    for(let i = 0; i < cardsDeck.length; i++){
-                        if(card._id == cardsDeck[i]){
+                    for(let i = 0; i < inDeck.length; i++){
+                        if(card._id == inDeck[i]){
                             return(
                                 <article key={card._id} onClick={()=>removeCard(card._id)}>
                                     <h1 key={card._id}>{card.name}</h1>

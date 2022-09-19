@@ -10,10 +10,10 @@ import { CardsProvider } from "../contexts/CardsContext";
 function MyApp({ Component, pageProps }:AppProps) {
   return (
     <AuthProvider>
-      <CardsProvider>
+      
       <Component {...pageProps} />
       <ToastContainer autoClose={2000}/>
-      </CardsProvider>
+      
     </AuthProvider>
   )
 }

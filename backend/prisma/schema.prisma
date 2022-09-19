@@ -21,7 +21,7 @@ model User{
 
 model Deck{
   id_deck String @id @default(uuid())
-  id_user String 
+  id_user String
   id_mongo String
   name String
   stars Int

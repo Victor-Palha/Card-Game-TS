@@ -5,12 +5,6 @@ type CardsContextData = {
     avatar: Avatar[],
     unique: UniqueCardI[],
     cards: Cards[],
-    addAvatar: (id:string) => void,
-    addCard: (id:string) => void,
-    removeCard: (id:string) => void,
-    avatarDeck: string,
-    uniqueDeck: string,
-    cardsDeck: string[]
 }
 
 type Avatar = {
@@ -79,9 +73,7 @@ export function CardsProvider({children}: CardsProviderProps){
     const [unique, setUnique] = useState([])
     const [cards, setCards] = useState([])
 
-    const [avatarDeck, setAvatarDeck] = useState("")
-    const [uniqueDeck, setUniqueDeck] = useState("")
-    const [cardsDeck, setCardsDeck] = useState<string[]>([])
+
 
     useEffect(()=>{
         async function getCards(){
@@ -95,25 +87,11 @@ export function CardsProvider({children}: CardsProviderProps){
             setUnique(responseUniques.data)
         }
         getCards()
-    },[cardsDeck])
+    },[])
 
-    function addAvatar(id:string){
-        return id
-    }
-    function addCard(id:string){
-        setCardsDeck([...cardsDeck, id])
-        console.log(cardsDeck)
-    }
-    function removeCard(id:string){
-        const index = cardsDeck.indexOf(id);
-        if (index > -1) { // only splice array when item is found
-            cardsDeck.splice(index, 1); // 2nd parameter means remove one item only
-        }
-        console.log(cardsDeck)
-    }
 
     return(
-        <CardsContext.Provider value={{avatar, unique, cards, addAvatar, addCard, removeCard, avatarDeck, uniqueDeck, cardsDeck}}>
+        <CardsContext.Provider value={{avatar, unique, cards}}>
             {children}
         </CardsContext.Provider>
     )

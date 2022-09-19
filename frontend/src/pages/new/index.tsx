@@ -15,6 +15,25 @@ import { Avatar, Cards, DeckCards } from '../../components/Cards'
 
 
 export default function NewDeck(){
+    const [avatarDeck, setAvatarDeck] = useState("")
+    const [uniqueDeck, setUniqueDeck] = useState("")
+    const [cardsDeck, setCardsDeck] = useState<string[]>([])
+
+    function addAvatar(id:string){
+        return id
+    }
+    function addCard(id:string){
+        setCardsDeck([...cardsDeck, id])
+        console.log(cardsDeck)
+    }
+    function removeCard(id:string){
+        const index = cardsDeck.indexOf(id);
+        if (index > -1) { // only splice array when item is found
+            cardsDeck.splice(index, 1); // 2nd parameter means remove one item only
+        }
+        console.log(cardsDeck)
+    }
+
     return(
     <CardsProvider>
         <>
@@ -24,19 +43,19 @@ export default function NewDeck(){
             <div>
                 <Header/>
             </div>
-
+            
             <div className={styles.box}>
                 <section className={styles.deck}>
                     <Input type="text" placeholder='Nome do seu deck'/><Button>Salvar</Button>
-                    <DeckCards validation={"Ability"}/>
+                    <DeckCards validation={"Ability"} inDeck={cardsDeck} removeCard={removeCard}/>
                     
                 </section>
                 <section className={styles.allCards}>
                     <div className={styles.conteiner}>
                         <Avatar/>
-                        <Cards validation={"Offensive"}/>
-                        <Cards validation={"Defensive"}/>
-                        <Cards validation={"Ability"}/>
+                        <Cards validation={"Offensive"} addCard={addCard}/>
+                        <Cards validation={"Defensive"} addCard={addCard}/>
+                        <Cards validation={"Ability"} addCard={addCard}/>
                     </div>
                 </section> 
             </div>

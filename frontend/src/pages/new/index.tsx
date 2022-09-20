@@ -19,19 +19,25 @@ export default function NewDeck(){
     const [uniqueDeck, setUniqueDeck] = useState("")
     const [cardsDeck, setCardsDeck] = useState<string[]>([])
 
+
+    useEffect(()=>{
+        
+    }, [cardsDeck])
+
     function addAvatar(id:string){
         return id
     }
     function addCard(id:string){
         setCardsDeck([...cardsDeck, id])
-        console.log(cardsDeck)
     }
     function removeCard(id:string){
         const index = cardsDeck.indexOf(id);
         if (index > -1) { // only splice array when item is found
             cardsDeck.splice(index, 1); // 2nd parameter means remove one item only
         }
-        console.log(cardsDeck)
+    }
+    function seeDeck(){
+        alert(cardsDeck.length)
     }
 
     return(
@@ -45,8 +51,10 @@ export default function NewDeck(){
             </div>
             
             <div className={styles.box}>
+                <button onClick={()=>seeDeck()}>see</button>
                 <section className={styles.deck}>
                     <Input type="text" placeholder='Nome do seu deck'/><Button>Salvar</Button>
+
                     <DeckCards validation={"Ability"} inDeck={cardsDeck} removeCard={removeCard}/>
                     
                 </section>

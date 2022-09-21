@@ -19,11 +19,6 @@ export default function NewDeck(){
     const [uniqueDeck, setUniqueDeck] = useState("")
     const [cardsDeck, setCardsDeck] = useState<string[]>([])
 
-
-    useEffect(()=>{
-        
-    }, [cardsDeck])
-
     function addAvatar(id:string){
         return id
     }

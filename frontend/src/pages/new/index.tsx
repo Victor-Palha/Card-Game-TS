@@ -50,6 +50,8 @@ export default function NewDeck(){
                 <section className={styles.deck}>
                     <Input type="text" placeholder='Nome do seu deck'/><Button>Salvar</Button>
 
+                    <DeckCards validation={"Offensive"} inDeck={cardsDeck} removeCard={removeCard}/>
+                    <DeckCards validation={"Defensive"} inDeck={cardsDeck} removeCard={removeCard}/>
                     <DeckCards validation={"Ability"} inDeck={cardsDeck} removeCard={removeCard}/>
                     
                 </section>

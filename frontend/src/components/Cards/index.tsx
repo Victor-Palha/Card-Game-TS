@@ -69,7 +69,8 @@ export function DeckCards({validation, inDeck, removeCard}: Cards){
             <div className={styles.cards} id={styles.inDeck}>
                 {cards.map((card)=>{
                     for(let i = 0; i < atual.length; i++){
-                        if(card._id == atual[i] && atual.length > 0){
+                        if(card._id == atual[i] && card.type == validation){
+                            console.log(atual)
                             return(
                                 <article key={card._id} onClick={()=>removeCard(card._id)}>
                                     <h1 key={card._id}>{card.name}</h1>

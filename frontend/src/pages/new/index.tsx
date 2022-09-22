@@ -49,10 +49,18 @@ export default function NewDeck(){
                 <button onClick={()=>seeDeck()}>see</button>
                 <section className={styles.deck}>
                     <Input type="text" placeholder='Nome do seu deck'/><Button>Salvar</Button>
-
-                    <DeckCards validation={"Offensive"} inDeck={cardsDeck} removeCard={removeCard}/>
-                    <DeckCards validation={"Defensive"} inDeck={cardsDeck} removeCard={removeCard}/>
-                    <DeckCards validation={"Ability"} inDeck={cardsDeck} removeCard={removeCard}/>
+                    {cardsDeck.length > 0 ?(
+                        <>
+                            <DeckCards validation={"Offensive"} inDeck={cardsDeck} removeCard={removeCard}/>
+                            <DeckCards validation={"Defensive"} inDeck={cardsDeck} removeCard={removeCard}/>
+                            <DeckCards validation={"Ability"} inDeck={cardsDeck} removeCard={removeCard}/>
+                        </>
+                    ) : (
+                        <>
+                            <h1>Nenhuma carta adicionada no deck</h1>
+                        </>
+                    )}
+                    
                     
                 </section>
                 <section className={styles.allCards}>
